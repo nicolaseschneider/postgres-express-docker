@@ -10,7 +10,7 @@ services:
     volumes:
       - dockerize-test-db:/var/lib/postgresql/data
 
-  dockerize-test:
+  server:
     build:
       context: .
     environment:

@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# PATHS
+BASE=$PWD
+DOCKER_COMPOSE_PATH="$BASE/docker-compose.yml"
+
+function runInNewTab() {
+  osascript -e 'tell application "Terminal" to activate' \
+            -e 'tell application "System Events" to keystroke "t" using {command down}' \
+            -e 'delay 1' \
+            -e 'tell application "Terminal" to do script "'"$1"'" in selected tab of the front window'
+}
+
+function constructImages() {
+  runInNewTab "docker build -t dockerize-test $BASE"
+}
+
+function composeAndMigrate() {
+  runInNewTab "docker-compose run dockerize-test npm run migrate"
+}
+
+function startUp() {
+  runInNewTab "docker-compose -f $DOCKER_COMPOSE_PATH up"
+}
+
+
+case $1 in
+  build-images)
+    constructImages
+  ;;
+  migrate)
+    composeAndMigrate
+  ;;
+  start)
+    startUp
+  ;;
+  "quit")
+    docker-compose -f $DOCKER_COMPOSE_PATH down &&
+    osascript -e 'tell application "Terminal" to close every window' \
+              -e 'tell application "Terminal" to activate' \
+              -e 'tell application "Terminal" to do script "'"cd $BASE"'"'
+  ;;
+  *)
+    printf "\n\nPlease specify a command\n\n\n
+    specify one of the following:\n\n
+    \tbuild-images\t- Builds the docker image of the local server
+    \tmigrate\t- Runs migrations within the docker container
+    \tstart\t- Launches local dev environment
+    \tquit\t- quits\nPlease"
+  ;;
+esac

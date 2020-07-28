@@ -3,6 +3,8 @@
 # PATHS
 BASE=$PWD
 DOCKER_COMPOSE_PATH="$BASE/docker-compose.yml"
+SERVER_PATH="$BASE/server"
+# this bash script is a work in progress
 
 function runInNewTab() {
   osascript -e 'tell application "Terminal" to activate' \
@@ -11,7 +13,7 @@ function runInNewTab() {
             -e 'tell application "Terminal" to do script "'"$1"'" in selected tab of the front window'
 }
 
-function constructImages() {
+function constructserver() {
   runInNewTab "docker build -t server $BASE"
 }
 
@@ -23,16 +25,25 @@ function startUp() {
   runInNewTab "docker-compose -f $DOCKER_COMPOSE_PATH up --build"
 }
 
+function launchDev() {
+  runInNewTab "docker-compose up postgres" &&
+  sleep .5 &&
+  runInNewTab "cd $SERVER_PATH; npm run pm2"
+}
+
 
 case $1 in
-  build-images)
-    constructImages
+  build-server)
+    constructserver
   ;;
   migrate)
     composeAndMigrate
   ;;
   start)
     startUp
+  ;;
+  launch-dev)
+    launchDev
   ;;
   "quit")
     docker-compose -f $DOCKER_COMPOSE_PATH down &&
@@ -43,7 +54,7 @@ case $1 in
   *)
     printf "\n\nPlease specify a command\n\n\n
     specify one of the following:\n\n
-    \tbuild-images\t- Builds the docker image of the local server
+    \tbuild-server\t- Builds the docker image of the server
     \tmigrate\t- Runs migrations within the docker container
     \tstart\t- Launches local dev environment
     \tquit\t- quits\nPlease"

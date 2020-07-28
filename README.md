@@ -41,6 +41,12 @@ Because of the way docker caches the server image, you will need to rebuild afte
 
 I attempted to build out a cli, currently having some issues. Will update with more info once it's working
 
+## nico-cli
+interact with this CLI by using:
+- $ sudo bash ./nico-cli
+This CLI should be able to get a local environment up and running for you quickly
+more commands to be added soon
+
 ## TODO
 add Babel as a package and convert everything to ES6 Syntax.
   - import x from 'y' is a million times more readable than var x = require('y')
@@ -50,9 +56,6 @@ add some sort of filewatching for local development
 
 add a migrations folder rather than just defining models in the database folder
   - currently everything just sits in the database.js not best practice, but fine for a barebones project
-
-get that ./nico-cli working
-  - it doesnt work right now
 
 Typescript conversion
   - type safety is my friend

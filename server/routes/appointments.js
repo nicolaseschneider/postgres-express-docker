@@ -22,8 +22,8 @@ router.delete('/:id', (req, res) => {
 router.put('/:doctorId', async (req, res) => {
   const { doctorId } = req.params;
   const {
-    patientFirstName,
-    patientLastName,
+    ptFirstName,
+    ptLastName,
     kind,
     hour,
     quarter,
@@ -47,8 +47,8 @@ router.put('/:doctorId', async (req, res) => {
     res.status(500).send(JSON.stringify('too many appointments for this time slot'));
   } else {
     Appointment.create({
-      patientFirstName,
-      patientLastName,
+      ptFirstName,
+      ptLastName,
       kind,
       scheduledTime,
       scheduledDay,

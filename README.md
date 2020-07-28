@@ -18,7 +18,7 @@ docker-compose up --remove-orphans --build
 and in a new tab:
 docker-compose run server npm run migrate
 
-
+make a put request to localhost:3000/seed to populate the database
 
 ## other commands
 docker-compose up postgres

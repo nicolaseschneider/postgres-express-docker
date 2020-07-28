@@ -3,9 +3,12 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+// ==== ROUTERS ====
 var indexRouter = require('./routes/index');
 var playersRouter = require('./routes/players');
 var helloWorldRouter = require('./routes/hello');
+// =================
+
 var app = express();
 
 app.use(logger('dev'));

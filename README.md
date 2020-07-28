@@ -34,6 +34,7 @@ docker rmi $(docker images -f "dangling=true" -q)
 
 cd server && npm run test
   - runs the jest test suite currently built.
+  - currently really only tests to see if the database is working
 
 ## Other Info
 Because of the way docker caches the server image, you will need to rebuild after making changes locally,

@@ -14,4 +14,4 @@ var db = require ('../database.js');
 //     db[modelName].associate(db);
 //   }
 // });
-db.sequelize.sync();
+db.sequelize.sync({force: true});

@@ -9,6 +9,10 @@ var playersRouter = require('./routes/players');
 var helloWorldRouter = require('./routes/hello');
 var profileRouter = require('./routes/profiles');
 var seedRouter = require('./routes/seed');
+
+var doctorRouter = require('./routes/doctors');
+var appointmentRouter = require('./routes/appointments');
+
 // =================
 
 var app = express();
@@ -24,5 +28,8 @@ app.use('/players', playersRouter);
 app.use('/hello', helloWorldRouter);
 app.use('/seed', seedRouter);
 app.use('/prof', profileRouter);
+
+app.use('/dr', doctorRouter);
+app.use('/apt', appointmentRouter);
 
 module.exports = app;

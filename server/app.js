@@ -7,6 +7,8 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var playersRouter = require('./routes/players');
 var helloWorldRouter = require('./routes/hello');
+var profileRouter = require('./routes/profiles');
+var seedRouter = require('./routes/seed');
 // =================
 
 var app = express();
@@ -20,5 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/players', playersRouter);
 app.use('/hello', helloWorldRouter);
+app.use('/seed', seedRouter);
+app.use('/prof', profileRouter);
 
 module.exports = app;

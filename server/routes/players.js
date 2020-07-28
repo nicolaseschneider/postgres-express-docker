@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 var express = require('express');
 var router = express.Router();
 var { Player } = require('../database');
@@ -13,15 +14,43 @@ router.get('/all', (req, res) => {
     });
 });
 
+router.get('/newest', (req, res) => {
+  Player.findOne({
+    order: [['createdAt', 'DESC']],
+  }).then(player => {
+    res.status(200).send(JSON.stringify(player))
+  })
+  .catch(err => {
+    res.status(500).send(JSON.stringify(err));
+  });
+});
+
+router.get('/1and3', (req, res) => {
+  Player.findAll({
+    where: {
+      [Op.or]: {
+        id: [1, 3]
+      }
+    }
+  }).then(players => {
+    res.status(200).send(JSON.stringify(players));
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).send(JSON.stringify(err));
+  });
+});
+
 router.get('/:id', (req, res) => {
   Player.findByPk(req.params.id)
-    .then(Player => {
-      res.status(200).send(JSON.stringify(Player));
+    .then(player => {
+      res.status(200).send(JSON.stringify(player));
     })
     .catch(err => {
       res.status(500).send(JSON.stringify(err));
     })
 });
+
 
 router.put('/', (req, res) => {
   // console.log(req.body);

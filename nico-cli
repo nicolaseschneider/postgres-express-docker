@@ -12,15 +12,15 @@ function runInNewTab() {
 }
 
 function constructImages() {
-  runInNewTab "docker build -t dockerize-test $BASE"
+  runInNewTab "docker build -t server $BASE"
 }
 
 function composeAndMigrate() {
-  runInNewTab "docker-compose run dockerize-test npm run migrate"
+  runInNewTab "docker-compose run server npm run migrate"
 }
 
 function startUp() {
-  runInNewTab "docker-compose -f $DOCKER_COMPOSE_PATH up"
+  runInNewTab "docker-compose -f $DOCKER_COMPOSE_PATH up --build"
 }
 
 

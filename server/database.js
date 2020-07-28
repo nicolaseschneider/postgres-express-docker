@@ -12,7 +12,7 @@ const sequelize = new Sequelize(
     }
   });
 
-const User = sequelize.define('User', {
+const Player = sequelize.define('Player', {
   firstName: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -29,5 +29,5 @@ const User = sequelize.define('User', {
 
 module.exports = {
   sequelize,
-  User,
+  Player,
 };

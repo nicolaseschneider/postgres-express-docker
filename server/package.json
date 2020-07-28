@@ -6,7 +6,8 @@
     "start": "node ./bin/www",
     "test": "jest",
     "migrate": "node ./bin/migrate.js",
-    "pm2": "pm2 start processes.json --no-daemon"
+    "pm2": "pm2 start processes.json --no-daemon",
+    "kill": "pm2 stop 0"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

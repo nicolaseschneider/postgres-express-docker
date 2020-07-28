@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
-var db = require('../database');
+var { Player } = require('../database');
 
 router.get('/all', (req, res) => {
-  db.User.findAll()
-    .then(users => {
-      res.status(200).send(JSON.stringify(users));
+  Player.findAll()
+    .then(players => {
+      res.status(200).send(JSON.stringify(players));
     })
     .catch(err => {
       console.log(err);
@@ -14,9 +14,9 @@ router.get('/all', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-  db.User.findByPk(req.params.id)
-    .then(user => {
-      res.status(200).send(JSON.stringify(user));
+  Player.findByPk(req.params.id)
+    .then(Player => {
+      res.status(200).send(JSON.stringify(Player));
     })
     .catch(err => {
       res.status(500).send(JSON.stringify(err));
@@ -24,14 +24,22 @@ router.get('/:id', (req, res) => {
 });
 
 router.put('/', (req, res) => {
-  db.User.create({
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    username: req.body.username,
-    id: req.body.id,
+  // console.log(req.body);
+  const {
+    firstName,
+    lastName,
+    username,
+    id,
+  } = req.body;
+  
+  Player.create({
+    firstName,
+    lastName,
+    username,
+    id,
   })
-    .then(user => {
-      res.status(200).send(JSON.stringify(user));
+    .then(player => {
+      res.status(200).send(JSON.stringify(player));
     })
     .catch(err => {
       res.status(500).send(JSON.stringify(err));
@@ -39,7 +47,7 @@ router.put('/', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-  db.User.destroy({
+  Player.destroy({
     where: {
       id: req.params.id,
     }

@@ -7,7 +7,7 @@ beforeAll(async () => {
 test('create user', async () => {
   expect.assertions(1);
   await db.sequelize.sync();
-  const user = await db.User.create({
+  const user = await db.Player.create({
     id: 1,
     firstName: 'Todd',
     lastName: 'Howard',
@@ -18,7 +18,7 @@ test('create user', async () => {
 
 test('get user', async () => {
   expect.assertions(3);
-  const user = await db.User.findByPk(1);
+  const user = await db.Player.findByPk(1);
   expect(user.firstName).toEqual('Todd');
   expect(user.lastName).toEqual('Howard');
   expect(user.username).toEqual('SkyrimLuvr_360');
@@ -26,12 +26,12 @@ test('get user', async () => {
 
 test('delete user', async () => {
   expect.assertions(1);
-  await db.User.destroy({
+  await db.Player.destroy({
     where: {
       id: 1,
     }
   });
-  const user = await db.User.findByPk(1);
+  const user = await db.Player.findByPk(1);
   expect(user).toBeNull();
 });
 

@@ -5,19 +5,19 @@ Make sure you have Docker installed!
 docker is great for packaging apps
 
 ## getting it running from the root directory
-  - $ cd server && npm install \n
-  - $ cd .. \n
-  - $ docker build -t server . \n
-  - $ docker-compose run server npm run migrate \n
+  - $ cd server && npm install 
+  - $ cd ..
+  - $ docker build -t server .
+  - $ docker-compose run server npm run migrate
   - $ docker-compose up
 
 ## alteratively run:
 
-docker-compose up --remove-orphans --build \n
-and in a new tab: \n
-docker-compose run server npm run migrate \n
+  - docker-compose up --remove-orphans --build
+  - and in a new tab:
+  - docker-compose run server npm run migrate
 
-make a put request to localhost:3000/seed to populate the database
+  - make a put request to localhost:3000/seed to populate the database
 
 ## other commands
 docker-compose up postgres

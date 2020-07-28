@@ -5,12 +5,11 @@ Make sure you have Docker installed!
 docker is great for packaging apps
 
 ## getting it running from the root directory
-cd server && npm install \n
-cd .. \n
-docker build -t server . \n
-docker-compose run server npm run migrate \n
-
-finally docker-compose up
+  - $ cd server && npm install \n
+  - $ cd .. \n
+  - $ docker build -t server . \n
+  - $ docker-compose run server npm run migrate \n
+  - $ docker-compose up
 
 ## alteratively run:
 

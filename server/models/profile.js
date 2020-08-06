@@ -1,6 +1,6 @@
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Player extends Model {
+  class Profile extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -12,6 +12,15 @@ module.exports = (sequelize, DataTypes) => {
           type: DataTypes.INTEGER,
           primaryKey: true,
           autoIncrement: true
+        },
+        playerId: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+          references: {
+            model: 'players',
+            key: 'id',
+          },
+          onDelete: 'CASCADE',
         },
         firstName: {
           type: DataTypes.STRING,
@@ -28,15 +37,19 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
     static associate(models) {
-      Player.hasOne(models.Profile, {
+      Profile.belongsTo(models.Player, {
         foreignKey: 'playerId',
-        as: 'profile',
-      });
+        onDelete: 'CASCADE',
+        as: 'player',
+      })
     }
   };
-  Player.init(Player.initData, {
+  Profile.init({
+    body: DataTypes.STRING,
+    playerId: DataTypes.INTEGER
+  }, {
     sequelize,
-    modelName: 'Player',
+    modelName: 'Profile',
   });
-  return Player;
+  return Profile;
 };

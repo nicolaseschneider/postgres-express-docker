@@ -32,21 +32,21 @@ const sequelize = new Sequelize(
 //   },
 // });
 
-const Profile = sequelize.define('profile', {
-  id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
-  body: {
-    type: Sequelize.STRING,
-  },
-  playerId: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-    // references: {
-    //   model: 'players',
-    //   key: 'id',
-    // },
-    // onDelete: 'CASCADE',
-  },
-});
+// const Profile = sequelize.define('profile', {
+//   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+//   body: {
+//     type: Sequelize.STRING,
+//   },
+//   playerId: {
+//     type: Sequelize.INTEGER,
+//     allowNull: false,
+//     references: {
+//       model: 'players',
+//       key: 'id',
+//     },
+//     onDelete: 'CASCADE',
+//   },
+// });
 
 // HERES THE NOTABLE STUFF
 
@@ -133,7 +133,8 @@ Appointment.associate= models => {
 // add new models to this obj as more associations are built out
 const models = { 
   // Player,
-  Profile, Doctor, Appointment };
+  // Profile,
+  Doctor, Appointment };
 // this is where we actually tell sequelize what the associations are
 Object.values(models).forEach(model => {
   if (model.associate) {
@@ -148,5 +149,5 @@ module.exports = {
   // Player,
   Doctor,
   Appointment,
-  Profile,
+  // Profile,
 };

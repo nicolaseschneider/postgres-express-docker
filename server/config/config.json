@@ -6,7 +6,6 @@
     "host": "0.0.0.0",
     "dialect": "postgres",
     "operatorsAliases": false,
-    "logging": false,
     "pool": {
       "max": 5,
       "min": 0,
@@ -21,7 +20,6 @@
     "host": "0.0.0.0",
     "dialect": "postgres",
     "operatorsAliases": false,
-    "logging": false,
     "pool": {
       "max": 5,
       "min": 0,
@@ -36,7 +34,6 @@
     "host": "0.0.0.0",
     "dialect": "postgres",
     "operatorsAliases": false,
-    "logging": false,
     "pool": {
       "max": 5,
       "min": 0,

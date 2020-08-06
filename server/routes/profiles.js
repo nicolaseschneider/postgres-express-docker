@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-
-var { Profile, Player } = require('../database');
+var { Player } = require('../models/index');
+var { Profile } = require('../database');
 
 router.put('/:playerId', async (req, res) => {
   const { playerId } = req.params;

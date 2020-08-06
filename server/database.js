@@ -16,21 +16,21 @@ const sequelize = new Sequelize(
 
 // when sequelize.sync() is run, It will create tables for every Model
 
-const Player = sequelize.define('players', {
-  id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
-  firstName: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-  lastName: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-  username: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-});
+// const Player = sequelize.define('players', {
+//   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+//   firstName: {
+//     type: Sequelize.STRING,
+//     allowNull: false,
+//   },
+//   lastName: {
+//     type: Sequelize.STRING,
+//     allowNull: false,
+//   },
+//   username: {
+//     type: Sequelize.STRING,
+//     allowNull: false,
+//   },
+// });
 
 const Profile = sequelize.define('profile', {
   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
@@ -40,11 +40,11 @@ const Profile = sequelize.define('profile', {
   playerId: {
     type: Sequelize.INTEGER,
     allowNull: false,
-    references: {
-      model: 'players',
-      key: 'id',
-    },
-    onDelete: 'CASCADE',
+    // references: {
+    //   model: 'players',
+    //   key: 'id',
+    // },
+    // onDelete: 'CASCADE',
   },
 });
 
@@ -115,23 +115,25 @@ Appointment.associate= models => {
   });
 };
 
-Player.associate = models => {
-  Player.hasOne(models.Profile, {
-    foreignKey: 'playerId',
-    as: 'profile',
-  })
-};
+// Player.associate = models => {
+//   Player.hasOne(models.Profile, {
+//     foreignKey: 'playerId',
+//     as: 'profile',
+//   })
+// };
 
-Profile.associate = models => {
-  Profile.belongsTo(models.Player, {
-    foreignKey: 'playerId',
-    onDelete: 'CASCADE',
-    as: 'player',
-  })
-};
+// Profile.associate = models => {
+//   Profile.belongsTo(models.Player, {
+//     foreignKey: 'playerId',
+//     onDelete: 'CASCADE',
+//     as: 'player',
+//   })
+// };
 
 // add new models to this obj as more associations are built out
-const models = { Player, Profile, Doctor, Appointment };
+const models = { 
+  // Player,
+  Profile, Doctor, Appointment };
 // this is where we actually tell sequelize what the associations are
 Object.values(models).forEach(model => {
   if (model.associate) {
@@ -143,7 +145,7 @@ Object.values(models).forEach(model => {
 
 module.exports = {
   sequelize,
-  Player,
+  // Player,
   Doctor,
   Appointment,
   Profile,

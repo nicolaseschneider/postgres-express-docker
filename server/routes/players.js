@@ -1,7 +1,7 @@
 const { Op } = require("sequelize");
 var express = require('express');
 var router = express.Router();
-var { Player } = require('../database');
+var { Player } = require('../models/index');
 
 router.get('/all', (req, res) => {
   Player.findAll()

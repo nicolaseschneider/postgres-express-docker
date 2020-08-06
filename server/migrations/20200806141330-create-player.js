@@ -1,6 +1,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Players', {
+    await queryInterface.createTable('players', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -27,6 +27,8 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Players');
+    // drop all tables at the start to get everything working
+    // await queryInterface.dropAllTables();
+    await queryInterface.dropTable('players', { cascade: true });
   }
 };

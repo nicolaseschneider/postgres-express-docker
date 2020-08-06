@@ -9,7 +9,8 @@
       "max_memory_restart": "200M",
       "env": {
         "PORT": 3000,
-        "NODE_ENV": "production"
+        "NODE_ENV": "production",
+        "DB_PORT": 5432
       }
     }
   ]

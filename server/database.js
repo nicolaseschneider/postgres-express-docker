@@ -97,6 +97,13 @@ const Appointment = sequelize.define('appointment', {
     onDelete: 'CASCADE',
   },
 });
+
+const User = sequelize.define('user', {
+  id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+  authLevel: {
+    type: Sequelize.ENUM('doctor', 'admin')
+  }
+});
 //==================
 
 // ASSOCIATIONS
@@ -134,7 +141,7 @@ Appointment.associate= models => {
 const models = { 
   // Player,
   // Profile,
-  Doctor, Appointment };
+  Doctor, Appointment, User };
 // this is where we actually tell sequelize what the associations are
 Object.values(models).forEach(model => {
   if (model.associate) {
@@ -149,5 +156,6 @@ module.exports = {
   // Player,
   Doctor,
   Appointment,
+  User,
   // Profile,
 };

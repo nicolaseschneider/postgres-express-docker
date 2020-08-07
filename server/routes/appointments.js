@@ -60,7 +60,59 @@ router.put('/:doctorId', async (req, res) => {
       res.status(500).send(JSON.stringify(err));
     })
   }
-})
+});
 
+router.patch('/:id', async (req, res) => {
+  const { id } = req.params;
+  const {
+    ptFirstName,
+    ptLastName,
+    kind,
+    hour,
+    quarter,
+    scheduledDay,
+    doctorId,
+  } = req.body;
+
+  const scheduledTime = `${hour}:${quarter * 15}`
+
+  const numApts = await Appointment.count({
+    where: {
+      doctorId,
+      scheduledDay,
+      scheduledTime,
+    }
+  });
+  if (numApts > 2) {
+    res.status(500).send(JSON.stringify('too many appointments for this time slot'));
+  }
+
+  Appointment.findByPk(id)
+    .then(apt => {
+      if (apt) {
+        apt.update({
+          ptFirstName,
+          ptLastName,
+          doctorId,
+          kind,
+          scheduledTime,
+          scheduledDay,
+        })
+        .then(newApt => {
+          res.status(200).send(JSON.stringify(newApt));
+        })
+        .catch(err => {
+          res.status(200).send(JSON.stringify(err));
+        });
+      } else {
+        res.status(404).send('apt not found');
+      }
+    })
+    .catch(err => {
+      res.status(500).send(JSON.stringify(err));
+    });
+
+
+})
 
 module.exports = router;

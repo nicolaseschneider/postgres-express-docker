@@ -15,6 +15,10 @@ var appointmentRouter = require('./routes/appointments');
 
 // =================
 
+
+// admin: yes
+// dr: can operate any endpoint using their doctorId
+// unAuth
 var app = express();
 
 app.use(logger('dev'));

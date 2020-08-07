@@ -2,8 +2,19 @@
 // var moment = require('moment');
 var express = require('express');
 var router = express.Router();
-var { Doctor, Appointment } = require('../database');
+var { Doctor, Appointment, User } = require('../database');
 
+
+router.use('/:id', async (req, res, next) => {
+  const { userId } = req.headers;
+  const user = User.findByPk(userId);
+  if (user) {
+    if (['doctor', 'admin'].includes(user.authLevel)) {
+      next();
+    }
+  }
+  res.status(401).send('Unauthorized');
+})
 
 // get all doctors
 router.get('/all', (req, res) => {
